@@ -4,6 +4,10 @@
 
    source('uploader_server.R', local = T)
 
+   source('uploader_server_CSV.R', local = T)
+
+   source('uploader_server_Rdata.R', local = T)
+
    source('plot_interativo_server.R', local = T)
 
    source('select_signals_server.R', local = T)

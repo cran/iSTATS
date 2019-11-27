@@ -5,7 +5,7 @@
       column(3,align = "left",
 
         radioButtons("radio", label = h5("Correlation Type"), selected = 1,
-                     choices = list("Pearson" = 1, "Spearman" = 2, "PearSpear" = 3)
+                     choices = list("Pearson" = 1, "Spearman" = 2,"PearSpear" = 3)
         )
         ),
 

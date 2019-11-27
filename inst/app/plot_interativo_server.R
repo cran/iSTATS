@@ -16,7 +16,7 @@
   spectrums_multi <- reactiveValues(dat = data.frame(Chemical_Shift=CS_values_real[1,],Spectrum=NMRData[1,]))
 
   # plot
-    output$plot_multi <- renderPlot({
+    output$plot_multi <- plotly::renderPlotly({
 
       ggplot2::ggplot(spectrums_multi$dat,ggplot2::aes(Chemical_Shift,Spectrum)) + ggplot2::geom_line(color='blue') +
 
@@ -34,29 +34,29 @@
 
     })
 
-  observeEvent(input$plot_brush_multi,{
-
-    brush <- input$plot_brush_multi
-
-    if (!is.null(brush)) {
-
-      ranges_multi$x <- c(brush$xmin, brush$xmax)
-
-      ranges_multi$y <- c(brush$ymin, brush$ymax)
-
-      idb_multi <<- 1
-
-      peran_multi <<- (ranges_multi$x[2] - ranges_multi$x[1])*0.2
-
-    }
-
-    else {
-
-        ranges_multi$x <- NULL
-
-    }
-
-  })
+  # observeEvent(input$plot_brush_multi,{
+  #
+  #   brush <- input$plot_brush_multi
+  #
+  #   if (!is.null(brush)) {
+  #
+  #     ranges_multi$x <- c(brush$xmin, brush$xmax)
+  #
+  #     ranges_multi$y <- c(brush$ymin, brush$ymax)
+  #
+  #     idb_multi <<- 1
+  #
+  #     peran_multi <<- (ranges_multi$x[2] - ranges_multi$x[1])*0.2
+  #
+  #   }
+  #
+  #   else {
+  #
+  #       ranges_multi$x <- NULL
+  #
+  #   }
+  #
+  # })
 
 
   chkzoom_multi <<- 1

@@ -114,14 +114,7 @@
   observeEvent(input$exp_rdata_sel, {
 
     save(matr_selec, CS_values_real, file = "NMRData_select.RData")
-
-    })
-
-
-  observeEvent(input$exp_csv_sel, {
-
-    write.table(matr_selec, file = 'NMRData_select.csv', append = FALSE, sep = ",", dec = ".",
-                row.names = FALSE, col.names = FALSE)
+    save(reg_selec, CS_values_real, file = "NMRData_select.RData")
 
     })
 
@@ -151,6 +144,34 @@
     spectrums$dat$Spectrum <- spectrums$dat$Spectrum/8
 
   })
+
+
+    output$downloadpoints <- downloadHandler(
+      filename = function() {
+        paste("Selected_Regions", ".csv", sep = "")
+      },
+      content = function(file) {
+        col_select <<- col_select[order(col_select)]
+        CS_sel_real <<- CS_selection$vranges[order(CS_selection$vranges,decreasing = TRUE)]
+        matr_cor <<- matrix(data = NMRData[,col_select],dim(NMRData)[1], length(CS_sel_real))
+        colnames(matr_cor) <<- CS_sel_real
+        write.table(matr_cor, file,sep = ",",col.names = TRUE,row.names = FALSE)
+      }
+    )
+
+
+    output$downloadareas <- downloadHandler(
+      filename = function() {
+        paste("Selected_Regions", ".csv", sep = "")
+      },
+      content = function(file) {
+        matrarea <- matr_selec[,rank(reg_selec[,1])]
+        regelec <- round(reg_selec[rank(reg_selec[,1]),],2)
+        nambu <- paste(as.character(regelec[,1]),as.character(regelec[,2]),sep = "-")
+        colnames(matrarea) <- nambu
+        write.table(matrarea, file,sep = ",",col.names = TRUE,row.names = FALSE)
+      }
+    )
 
 
   observeEvent(input$rsh_sel1, {
@@ -283,9 +304,7 @@
   })
 
 
-  observeEvent(
-
-    input$s_stocsy, {
+  observeEvent(input$s_stocsy, {
 
       if (!(sel_ind == 0)) {
 
@@ -333,6 +352,8 @@
 
         cor_spearman <<- cor(matr_cor[,], method = "spearman")
 
+        # cor_kendall <<- cor(matr_cor[,], method = "kendall")
+
         facts$fac_stocsy_i <<- rr[]
 
         facts_is$fac_stocsy_is <<- rr[]
@@ -378,11 +399,13 @@
 
           CS_selection$vranges <<- CS_values_real[1,col_select]
 
-          matr_selec <<- matrix(data = NMRData[,llim:hlim],dim(NMRData)[1], length(CS_selection$vranges))
+          matr_selec <<- rowSums(matrix(data = NMRData[,llim:hlim],dim(NMRData)[1], length(CS_selection$vranges)))
 
           reg_selec <<- matrix (data = c(brush$xmin,brush$xmax), 1, 2)
 
           pos_map <<- matrix(c(1,length(col_select)), 1, 2)
+
+
 
        }
 
@@ -454,6 +477,9 @@
           reg_selec <<- rbind(reg_selec, dyn_brush)
 
           col_select <<- c(col_select, col_select_2)
+
+          matr_selec <<- cbind(matr_selec,rowSums(matrix(data = NMRData[,llim:hlim],dim(NMRData)[1], length(col_select_2))))
+
 
           }
 

@@ -113,7 +113,39 @@
 
         facts$fac_stocsy_i <<- rr[]
 
-      }
+    }
+
+    # if (value == 3) {
+    #
+    #   for (k in 1:dim(NMRData)[2]) {
+    #
+    #     if (k %in% col_select) {
+    #
+    #       z <<- which(col_select[] == k)
+    #
+    #       if (cor_kendall[drv_pk,z] >= cor_cutoff_i) {
+    #
+    #         rr[k] <<- "A"
+    #
+    #       }
+    #
+    #       else {
+    #
+    #         rr[k] <<- "B"
+    #
+    #       }
+    #     }
+    #
+    #     else {
+    #
+    #       rr[k] <<- "B"  #falta transformar 'rr' em variavel reativa
+    #
+    #     }
+    #   }
+    #
+    #   facts$fac_stocsy_i <<- rr[]
+    #
+    # }
 
       if (value == 3) {
 
@@ -421,8 +453,5 @@
        })
 
 
-  observeEvent(input$hover_stocsy_i, {
-
-    })
 
 

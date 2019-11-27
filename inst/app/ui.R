@@ -10,13 +10,19 @@ fluidPage(title="iSTATS",
                                                                                     width = "80px")), selected = "Home", inverse = T,
                       navbarMenu("Data",
 
-                                  tabPanel("Import CSV data",
+                                  tabPanel("Import Bruker file - convbin2asc",
                                            uiOutput('imputa')),
+
+                                  tabPanel("Import CSV file",
+                                           uiOutput('imputa2')),
+
+                                  tabPanel("Import Rdata file",
+                                           uiOutput('imputa3')),
 
                                   tabPanel("Example Data",
                                           source('example_data_ui.R', local = T)[1]),
 
-                                 tabPanel("Plot Spectra",
+                                  tabPanel("Plot Spectra",
 
                                           source('plot_interativo_ui.R', local = T)[1])
 

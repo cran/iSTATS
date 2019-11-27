@@ -12,9 +12,9 @@ onStop(function() {
 
   message("Stopping iSTATS ...\n")
 
-  clear_list <- c("CS_selection","gg","gr","buma","CS_values_real",
-                  "facts","facts_is","facts_rt","NMRData","Scaling_cor",
-                  "testy","testy_multi","testy_stocsy_i","alr_click",
+  clear_list <- c("CS_selection","gg","gr","buma","CS_values_real","NMRData","NMRData_temp",
+                  "facts","facts_is","facts_rt","Scaling_cor", "up2", "upfile1", "up","up3",
+                  "testy","testy_multi","testy_stocsy_i","alr_click","upfile3",
                   "chkzoom","chkzoom_multi","chkzoom_stocsy_i","chkzoom_stocsy_is",
                   "chkzoom_stocsy_rt", "col_select","cor_cutoff","cor_cutoff_i",
                   "cor_cutoff_rt","dc","exp_click","exran","file_names","idb",

@@ -1,13 +1,13 @@
 
-observeEvent(input$file1, {
+observeEvent(input$file2, {
 
   buma <<- 0
 
-  if(is.null(input$file1))  return(NULL)
+  if(is.null(input$file2))  return(NULL)
 
-  up <<-input$file1
+  up2 <<-input$file2
 
-  if (length(up$name) < 2) {
+  if (length(up2$name) < 2) {
 
     showModal(modalDialog(
       title = "Warning!!!",
@@ -24,13 +24,13 @@ observeEvent(input$file1, {
 
   else {
 
-    upfile <<-list()
+    upfile1 <<-list()
 
     # Upload of samples
 
-    for(l in 1:length(up$name)) {
+    for(l in 1:length(up2$name)) {
 
-      upfile[[l]] <<- data.table::fread(up$datapath[l],
+      upfile1[[l]] <<- data.table::fread(up2$datapath[l],
                             header = FALSE, sep = ",",data.table=FALSE)
 
     }
@@ -39,7 +39,7 @@ observeEvent(input$file1, {
     lslim = as.numeric(input$ls_lims)
     hslim = as.numeric(input$hs_lims)
 
-    file_names_full <<- up$name
+    file_names_full <<- up2$name
 
     file_names <<- substr(basename(file_names_full),1, nchar(basename(file_names_full))-4)
 
@@ -47,13 +47,13 @@ observeEvent(input$file1, {
 
     file_names <<- gtools::mixedsort(file_names)
 
-    upfile <<- lapply(upfile, function(k) if(anyNA(k)) k[-1,c(4,2)] else k[,c(4,2)])
+    # upfile1 <<- lapply(upfile1, function(k) if(anyNA(k)) k[-1,c(4,2)] else k[,c(4,2)])
 
-    list_len <- length(upfile)
+    list_len <- length(upfile1)
 
-    CS_values <<- unlist((upfile[[1]][1]),use.names = FALSE, recursive = FALSE)
+    CS_values <<- unlist((upfile1[[1]][1]),use.names = FALSE, recursive = FALSE)
 
-    NMRData_temp <<- t(lapply(upfile, function(k) k[,2]))
+    NMRData_temp <<- t(lapply(upfile1, function(k) k[,2]))
 
     hspoint <- which(abs(CS_values-lslim)==min(abs(CS_values-lslim)))[1]
 
@@ -63,7 +63,7 @@ observeEvent(input$file1, {
 
     np = npf + 1
 
-    CS_values_temp <- lapply(upfile, function(k) k[,1])
+    CS_values_temp <- lapply(upfile1, function(k) k[,1])
 
     hspoint <- sapply(CS_values_temp, function (v) which(abs(v-lslim)==min(abs(v-lslim)))[1])
 
@@ -109,7 +109,7 @@ observeEvent(input$file1, {
 #
 #     if(length(FilesX)>2) {
 #
-#       upfile <<- lapply(FilesX, function(x) data.table::fread(x, header = FALSE, sep = ",",data.table=FALSE) )
+#       upfile1 <<- lapply(FilesX, function(x) data.table::fread(x, header = FALSE, sep = ",",data.table=FALSE) )
 #
 #       lslim = as.numeric(input$ls_lims)
 #
@@ -123,11 +123,11 @@ observeEvent(input$file1, {
 #
 #       file_names <<- gtools::mixedsort(file_names)
 #
-#       list_len <- length(upfile)
+#       list_len <- length(upfile1)
 #
-#       CS_values <<- unlist((upfile[[1]][1]),use.names = FALSE, recursive = FALSE)
+#       CS_values <<- unlist((upfile1[[1]][1]),use.names = FALSE, recursive = FALSE)
 #
-#       NMRData_temp <<- t(lapply(upfile, function(k) k[,2]))
+#       NMRData_temp <<- t(lapply(upfile1, function(k) k[,2]))
 #
 #       hspoint <- which(abs(CS_values-lslim)==min(abs(CS_values-lslim)))[1]
 #
@@ -137,7 +137,7 @@ observeEvent(input$file1, {
 #
 #       np = npf + 1
 #
-#       CS_values_temp <- lapply(upfile, function(k) k[,1])
+#       CS_values_temp <- lapply(upfile1, function(k) k[,1])
 #
 #       hspoint <- sapply(CS_values_temp, function (v) which(abs(v-lslim)==min(abs(v-lslim)))[1])
 #
@@ -171,7 +171,7 @@ observeEvent(input$file1, {
 # }  )
 
 
-output$imputa <- renderUI({
+output$imputa2 <- renderUI({
 
   tagList(
 
@@ -181,12 +181,18 @@ output$imputa <- renderUI({
 
                         fluidRow(div(style="height:30px")),
 
-                        fileInput("file1", "Choose ASC Bruker Files",
+                        fileInput("file2", "Choose CSV Files",
                                   multiple = TRUE,
                                   accept = c("text/csv",
                                              "text/comma-separated-values,
                     text/plain",".csv",".CSV")
                         ),
+
+                        # tags$button(id = "import1",
+                        #             class = "btn action-button btn_lmax",
+                        #             tags$img(src = "csv_i.png",
+                        #                      height = "50px", width = "50px")
+                        # ),
 
                         fluidRow(div(style="height:30px")),
 
@@ -212,7 +218,7 @@ output$imputa <- renderUI({
 
                         fluidRow(div(style="height:30px")),
 
-                        fluidRow( tags$b("IMPORTANT: The ASC files should be export by Topspin (Bruker software) using command convbin2asc.")),
+                        fluidRow( tags$b("IMPORTANT: the CSV files must contain only NMR chemical shift and intensity columns, respectively, separated by commas.")),
 
 
                         mainPanel(

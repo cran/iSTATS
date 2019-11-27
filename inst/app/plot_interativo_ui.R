@@ -74,13 +74,15 @@
 
       br(),
 
-      plotOutput("plot_multi", width = "90%", height = "500px",
-                 click = "plot_click_multi", dblclick = "plot_dblclick_multi",
-                 brush = brushOpts(id = "plot_brush_multi",delay = 5000,
-                                   fill = "#ccc", direction = "xy", resetOnNew = TRUE)
+      plotly::plotlyOutput("plot_multi")
 
-
-      )
+      # plotOutput("plot_multi", width = "90%", height = "500px",
+      #            click = "plot_click_multi", dblclick = "plot_dblclick_multi",
+      #            brush = brushOpts(id = "plot_brush_multi",delay = 5000,
+      #                              fill = "#ccc", direction = "xy", resetOnNew = TRUE)
+      #
+      #
+      # )
 
     )
 

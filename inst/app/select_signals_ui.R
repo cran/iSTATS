@@ -131,7 +131,11 @@
        tags$button(id = "s_stocsy",
                    class = "btn action-button btn_t",
                    tags$img(src = "s_stocsy_.png",
-                            height = "35px", width = "40px"))
+                            height = "35px", width = "40px")),
+
+       downloadButton("downloadpoints", "Download Selected Points"),
+
+       downloadButton("downloadareas", "Download Selected Areas")
 
         )
 
@@ -145,7 +149,6 @@
 
           p(strong("Select a region to be expanded at the right plot.")),
 
-
           plotOutput("plot1", height = "450px",click = "sel_click", dblclick = "plot_dblclick",
                      brush = brushOpts(id = "plot_brush",delay = 5000, fill = "#ccc", direction = "xy", resetOnNew = TRUE))
         ),
@@ -154,8 +157,8 @@
 
           p(strong("Select each region of interest and click on top left button to load it, then click on START.")),
 
-          plotOutput("plot2", height = "450px", click = "cor_click", dblclick = "cor_dblclick",
-                     brush = brushOpts(id = "sel_brush",delay = 5000, fill = "#ccc", direction = "x", resetOnNew = TRUE))
+           plotOutput("plot2", height = "450px", click = "cor_click", dblclick = "cor_dblclick",
+                        brush = brushOpts(id = "sel_brush",delay = 5000, fill = "#ccc", direction = "x", resetOnNew = TRUE))
 
 
 

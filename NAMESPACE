@@ -2,8 +2,12 @@
 
 export(iSTATS)
 import(Cairo)
+import(data.table)
 import(ggplot2)
 import(gtools)
+import(plotly, except = last_plot)
+
+import(rstudioapi)
 import(shiny)
 import(shinyBS)
 import(shinyWidgets)
