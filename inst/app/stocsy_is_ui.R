@@ -28,7 +28,7 @@
            fluidRow(
 
              sliderInput("cutoff_stocsy_is", label = h5("Correlation Cutoff"), min = 0,
-                         max = 1, value = 0.9 , step= 0.1)
+                         max = 1, value = 0.9 , step= 0.01)
             ),
 
            fluidRow(

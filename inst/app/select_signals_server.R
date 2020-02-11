@@ -1,4 +1,4 @@
-  NMRData_Mean <- colMeans(NMRData[,])
+  # NMRData_Mean <- colMeans(NMRData[,])
 
   col_select <<- c()
 
@@ -10,7 +10,7 @@
 
   exp_click <<- 0
 
-  ysup <- max(NMRData_Mean)
+  ysup <- max(NMRData[,])
 
   yinf <- ysup*-0.03
 
@@ -18,7 +18,7 @@
 
   cor_cutoff <<- 0.8
 
-  testy <<- data.frame(Chemical_Shift=CS_values_real[1,],Spectrum=NMRData_Mean[])
+  testy <<- data.frame(Chemical_Shift=CS_values_real[1,],Spectrum=NMRData[1,])
 
   CS_selection <<- reactiveValues(vranges = c(-13131313,-131313))
 
@@ -26,10 +26,16 @@
 
   ranges_sel <- reactiveValues(x = c(min(testy$Chemical_Shift),(max(testy$Chemical_Shift))), y = c(yinf,ysup))
 
-  spectrums <- reactiveValues(dat = data.frame(Chemical_Shift=CS_values_real[1,],Spectrum=NMRData_Mean[]))
+  spectrums <- reactiveValues(dat = data.frame(Chemical_Shift=CS_values_real[1,],Spectrum=NMRData[1,]))
 
-  spectrums_sel <- reactiveValues(dat = data.frame(Chemical_Shift=CS_values_real[1,],Spectrum=NMRData_Mean[]))
+  spectrums_sel <- reactiveValues(dat = data.frame(Chemical_Shift=CS_values_real[1,],Spectrum=NMRData[1,]))
 
+
+  observeEvent(input$radio_s, {
+
+    value <<- (input$radio_s)
+
+    if (value == 1){
 
   output$plot1 <- renderPlot({
 
@@ -64,6 +70,74 @@
       ggplot2::labs(x = "Chemical Shift", y = "Intensity")
 
   })
+
+    }
+
+    if (value == 2){
+
+  output$plot1 <- renderPlot({
+
+    p <- ggplot2::ggplot() +
+
+      ggplot2::coord_cartesian(xlim = ranges$x, ylim = ranges$y, expand = FALSE) + ggplot2::scale_x_reverse() +
+
+      ggplot2::theme(axis.text.x = ggplot2::element_text(size = 12, color = "#000000"),
+                     axis.text.y = ggplot2::element_text(size = 12, color = "#000000"),
+                     title = ggplot2::element_text(face = "bold", color = "#000000", size = 17),
+                     axis.title = ggplot2::element_text(face = "bold", color = "#000000", size = 15)
+      ) +
+
+      ggplot2::labs(x = "Chemical Shift", y = "Intensity") +
+
+      ggplot2::geom_vline(xintercept=CS_selection$vranges, color = "red", size = 0.1, alpha=0.01)
+
+    # loop
+    for (i in 1:length(file_names)) {
+
+      spectrums_multi <- data.frame(Chemical_Shift=CS_values_real[1,],Spectrum=NMRData[i,])
+
+      p <- p + ggplot2::geom_line(data=spectrums_multi, mapping=ggplot2::aes(x=Chemical_Shift,y=Spectrum),color='blue')
+
+    }
+
+    p
+
+  })
+
+
+
+  output$plot2 <- renderPlot({
+
+
+    k <- ggplot2::ggplot() +
+
+      ggplot2::coord_cartesian(xlim = ranges_sel$x, ylim = ranges_sel$y, expand = FALSE) + ggplot2::scale_x_reverse() +
+
+      ggplot2::theme(axis.text.x = ggplot2::element_text(size = 12, color = "#000000"),
+                     axis.text.y = ggplot2::element_text(size = 12, color = "#000000"),
+                     title = ggplot2::element_text(face = "bold", color = "#000000", size = 17),
+                     axis.title = ggplot2::element_text(face = "bold", color = "#000000", size = 15)
+      ) +
+
+      ggplot2::labs(x = "Chemical Shift", y = "Intensity")
+
+    # loop
+    for (i in 1:length(file_names)) {
+
+      spectrums_sel <- data.frame(Chemical_Shift=CS_values_real[1,],Spectrum=NMRData[i,])
+
+      # use aes_string with names of the data.frame
+      k <- k + ggplot2::geom_line(data=spectrums_sel, mapping=ggplot2::aes(x=Chemical_Shift,y=Spectrum),color='blue')
+
+    }
+
+    k
+
+  })
+
+}})
+
+
 
 
   observeEvent(input$plot_brush,{

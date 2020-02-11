@@ -21,6 +21,7 @@
      conditionalPanel(condition="$('html').hasClass('shiny-busy')",
                      tags$div("Loading...",id="loadmessage"))),
 
+
      fluidRow(
 
        column(6,
@@ -66,6 +67,8 @@
                         class = "btn action-button btn_rmax",
                         tags$img(src = "s_right.png",
                                  height = "35px", width = "40px"))
+
+
 
             ),
 
@@ -114,12 +117,17 @@
 
                    )),
 
+       column(1,align = "left",
+
+              radioButtons("radio_s", label = h5("Spectrum Type"), selected = 1,
+                           choices = list("Average" = 1, "Overlap" = 2))),
 
 
 
-  fluidRow(
 
-    column(6,align = "center",div(style="line-height: 100px; vertical-align: center",
+
+
+    column(5,align = "center",div(style="line-height: 100px; vertical-align: center",
 
 
        tags$button(id = "sel_cor",
@@ -139,7 +147,7 @@
 
         )
 
-              ))),
+              )),
 
     fluidRow(div(style="height:15px")),
 
@@ -164,7 +172,7 @@
 
         )
       )
-    )
 
+)
 
 
