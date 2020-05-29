@@ -75,6 +75,8 @@ observeEvent(input$file2, {
 
     CS_values_real <<- rbind(CS_values,CS_values)
 
+    NMRData_plot <<- NMRData
+
     NMRData <<- NMRData + abs(min(NMRData))
 
 

@@ -13,7 +13,7 @@
   idb_stocsy_is <<- 0
 
 
-  ysup_stocsy_is <- max(NMRData[1,])
+  ysup_stocsy_is <- max(NMRData_plot[1,])
 
   yinf_stocsy_is <- ysup_stocsy_is*-0.03
 
@@ -26,7 +26,7 @@
 
   normalize <- (NMRData[1,] - min(NMRData[1,]))
 
-  spectrums_stocsy_is <- reactiveValues(dat = data.frame(Chemical_Shift=CS_values_real[1,],Spectrum=normalize)) #, facs = data.frame(fac_stocsy_is = rr_is[])
+  spectrums_stocsy_is <- reactiveValues(dat = data.frame(Chemical_Shift=CS_values_real[1,],Spectrum=NMRData_plot[1,])) #, facs = data.frame(fac_stocsy_is = rr_is[])
 
   facts_is <<- reactiveValues(fac_stocsy_is = c())
 
@@ -36,7 +36,7 @@
 
       ggplot2::geom_line(ggplot2::aes(colour=facts_is$fac_stocsy_is,group=1)) + ggplot2::guides(colour = FALSE) + ggplot2::scale_colour_manual(values = c("red","blue")) +
 
-      ggplot2::coord_cartesian(xlim = ranges_stocsy_is$x, ylim = ranges_stocsy_is$y, expand = FALSE) +
+      ggplot2::coord_cartesian(xlim = c(ranges_stocsy_is$x[2],ranges_stocsy_is$x[1]), ylim = ranges_stocsy_is$y, expand = FALSE) +
 
       ggplot2::scale_x_reverse() +
 
@@ -247,7 +247,7 @@
 
     freshnum_stocsy_is <- which(file_names[] == input$spectrum_list_stocsy_is)
 
-    ysup_stocsy_is <- max (NMRData[freshnum_stocsy_is,])
+    ysup_stocsy_is <- max (NMRData_plot[freshnum_stocsy_is,])
 
     yinf_stocsy_is <- ysup_stocsy_is*-0.03
 
@@ -324,7 +324,7 @@
 
     freshnum_stocsy_is <- which(file_names[] == input$spectrum_list_stocsy_is)
 
-    normalize <<- (NMRData[freshnum_stocsy_is,] - min(NMRData[freshnum_stocsy_is,]))
+    normalize <<- (NMRData_plot[freshnum_stocsy_is,] - min(NMRData_plot[freshnum_stocsy_is,]))
 
     spectrums_stocsy_is$dat <- data.frame(Chemical_Shift=CS_values_real[1,],Spectrum=normalize)
 

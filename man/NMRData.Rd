@@ -4,7 +4,9 @@
 \name{NMRData}
 \alias{NMRData}
 \title{Matrix of NMR intensities}
-\format{A matrix with 11 rows and 32778 variables:}
+\format{
+A matrix with 11 rows and 32778 variables:
+}
 \usage{
 NMRData
 }

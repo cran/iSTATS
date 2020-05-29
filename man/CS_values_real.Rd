@@ -4,7 +4,9 @@
 \name{CS_values_real}
 \alias{CS_values_real}
 \title{Matrix of NMR chemical shifts}
-\format{A matrix with 11 rows and 32778 variables:}
+\format{
+A matrix with 11 rows and 32778 variables:
+}
 \usage{
 CS_values_real
 }

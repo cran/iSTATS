@@ -1,5 +1,5 @@
 
-globalVariables(c("shiny", "Cairo", "shinyWidgets","ggplot2","gtools","shinyBS", "iSTATS","up","rstudioapi","data.table","plotly"))
+globalVariables(c("shiny", "Cairo", "shinyWidgets","ggplot2","gtools", "iSTATS","up","rstudioapi","data.table","plotly"))
 
 #' @title A Graphical Interface to Perform STOCSY analyses on NMR Data
 #'
@@ -12,7 +12,7 @@ globalVariables(c("shiny", "Cairo", "shinyWidgets","ggplot2","gtools","shinyBS",
 #'              regions to apply STOCSY methods more accurately.
 #'
 #'
-#' @import shiny Cairo shinyBS shinyWidgets rstudioapi data.table ggplot2 gtools
+#' @import shiny Cairo shinyWidgets shinyBS rstudioapi data.table ggplot2 gtools
 #'
 #' @rawNamespace import(plotly, except = last_plot)
 #'

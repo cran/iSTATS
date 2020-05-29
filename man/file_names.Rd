@@ -4,7 +4,9 @@
 \name{file_names}
 \alias{file_names}
 \title{A list of sample names}
-\format{A list of string with sample names}
+\format{
+A list of string with sample names
+}
 \usage{
 file_names
 }

@@ -1,11 +1,7 @@
 
-
 fluidPage(title="iSTATS",
-
   fluidRow(
-
     column(12, align="center",
-
            navbarPage(id = "main_bar",title = div(style = "vertical-align: top",img(src="ISTATS.1.png", heigth = "80px",
                                                                                     width = "80px")), selected = "Home", inverse = T,
                       navbarMenu("Data",
@@ -20,28 +16,38 @@ fluidPage(title="iSTATS",
                                            uiOutput('imputa3')),
 
                                   tabPanel("Example Data",
-                                          source('example_data_ui.R', local = T)[1]),
-
-                                  tabPanel("Plot Spectra",
-
-                                          source('plot_interativo_ui.R', local = T)[1])
+                                          source('example_data_ui.R', local = T)[1])
 
 
                       ),
 
-                      navbarMenu("STOCSY",
+                      navbarMenu("Plot",
 
+                                 tabPanel("Plot Spectra",
+                                          source('plot_interativo_ui.R', local = T)[1])
+                      ),
+
+                      navbarMenu("Select",
 
                                  tabPanel("Select Signals",
                                           source('select_signals_ui.R', local = T)[1]
                                  ),
+
+                                 tabPanel("Normalize Selection",
+                                          source('Pretreatment_ui.R', local = T)[1]
+                                 )
+                      ),
+
+                      navbarMenu("STOCSY",
+
                                  tabPanel("STOCSY-i",
                                           source('stocsy_i_ui.R', local = T)[1]
                                  ),
+
                                  tabPanel("STOCSY-is",
                                           source('stocsy_is_ui.R', local = T)[1]
-                                 )
-                                 ,
+                                 ),
+
                                  tabPanel("STOCSY-rt",
                                           source('stocsy_rt_ui.R', local = T)[1]
 
@@ -57,19 +63,11 @@ fluidPage(title="iSTATS",
                                           source('about_ui.R', local = TRUE)[1]
                                  )
                       )
-
            ),
 
-
            conditionalPanel(condition="$('html').hasClass('shiny-busy')",
-                            tags$div("Loading...",id="loadmessage"))
-
-
+                            tags$div("Loading...",id="loadmessage")
+           )
     )
-
-
   )
-
-
-
 )

@@ -133,17 +133,32 @@
        tags$button(id = "sel_cor",
                    class = "btn action-button btn_t",
                    tags$img(src = "sel_cor.png",
-                            height = "35px", width = "40px")
-        ),
+                            height = "35px", width = "40px")),
+                   bsTooltip("sel_cor", "Save selected region",
+                             "right", options = list(container = "body")),
 
        tags$button(id = "s_stocsy",
                    class = "btn action-button btn_t",
                    tags$img(src = "s_stocsy_.png",
                             height = "35px", width = "40px")),
+                   bsTooltip("s_stocsy", "Start STOCSY-I on raw data",
+                            "right", options = list(container = "body")),
 
-       downloadButton("downloadpoints", "Download Selected Points"),
+        downloadButton("downloadareas",icon("sakod"),
+                      class = "btn btn-default shiny-download-link",
+                      tags$img(src = "download_buckets.png",
+                      height = "35px", width = "40px")),
+                      bsTooltip("downloadareas", "Download selected areas",
+                                "right", options = list(container = "body")),
 
-       downloadButton("downloadareas", "Download Selected Areas")
+
+        downloadButton("downloadpoints", icon("sakod"),
+                      class = "btn shiny-download-link",
+                      tags$img(src = "download_points.png",
+                      height = "35px", width = "40px")),
+                      bsTooltip("downloadpoints", "Download selected points",
+                               "right", options = list(container = "body"))
+
 
         )
 
@@ -151,11 +166,14 @@
 
     fluidRow(div(style="height:15px")),
 
+
       fluidRow(
 
         column(6, align="center",
 
-          p(strong("Select a region to be expanded at the right plot.")),
+          fluidRow(p(strong("Select a region to be expanded at the right plot."))),
+
+
 
           plotOutput("plot1", height = "450px",click = "sel_click", dblclick = "plot_dblclick",
                      brush = brushOpts(id = "plot_brush",delay = 5000, fill = "#ccc", direction = "xy", resetOnNew = TRUE))
@@ -163,7 +181,7 @@
 
         column(6, align="center",
 
-          p(strong("Select each region of interest and click on top left button to load it, then click on START.")),
+           fluidRow(p(strong("Select each region of interest and click on top left button to save it, then click on START."))),
 
            plotOutput("plot2", height = "450px", click = "cor_click", dblclick = "cor_dblclick",
                         brush = brushOpts(id = "sel_brush",delay = 5000, fill = "#ccc", direction = "x", resetOnNew = TRUE))

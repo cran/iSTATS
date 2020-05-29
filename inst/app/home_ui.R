@@ -3,7 +3,7 @@
 
     fluidRow(div(style="height:50px")),
 
-     tags$img(src = "fluxogram.png",
+     tags$img(src = "istats1.gif",
               height = "450px", width = "524px"))
 
     # tags$img(src = "logo_stocsy.gif",

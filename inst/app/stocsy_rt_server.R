@@ -8,7 +8,7 @@
 
   peran_stocsy_rt <<- 0
 
-  ysup_stocsy_rt <- max(NMRData[1,])
+  ysup_stocsy_rt <- max(NMRData_plot[1,])
 
   yinf_stocsy_rt <- ysup_stocsy_rt*-0.03
 
@@ -18,7 +18,7 @@
 
   ranges_stocsy_rt <- reactiveValues(x = c((min(testy_stocsy_rt$Chemical_Shift)), max(testy_stocsy_rt$Chemical_Shift)), y = c(yinf_stocsy_rt,ysup_stocsy_rt))
 
-  spectrums_stocsy_rt <- reactiveValues(dat = data.frame(Chemical_Shift=CS_values_real[1,],Spectrum=NMRData[1,])) #, facs = data.frame(fac_stocsy_rt = rr_rt[])
+  spectrums_stocsy_rt <- reactiveValues(dat = data.frame(Chemical_Shift=CS_values_real[1,],Spectrum=NMRData_plot[1,])) #, facs = data.frame(fac_stocsy_rt = rr_rt[])
 
   facts_rt <<- reactiveValues(fac_stocsy_rt = c())
 
@@ -30,7 +30,7 @@
 
     ggplot2::geom_line(ggplot2::aes(colour=facts_rt$fac_stocsy_rt,group=1)) + ggplot2::guides(colour = FALSE) + ggplot2::scale_colour_manual(values = c("red","blue")) +
 
-    ggplot2::coord_cartesian(xlim = ranges_stocsy_rt$x, ylim = ranges_stocsy_rt$y, expand = FALSE) +
+    ggplot2::coord_cartesian(xlim = c(ranges_stocsy_i$rt[2],ranges_stocsy_i$rt[1]), ylim = ranges_stocsy_rt$y, expand = FALSE) +
 
     ggplot2::scale_x_reverse() +
 
@@ -104,7 +104,7 @@
 
          else {
 
-              rr_rt[k] <<- "B"  #falta transformar 'rr_rt' em variavel reativa
+              rr_rt[k] <<- "B"
 
          }
 
@@ -224,7 +224,7 @@
 
     freshnum_stocsy_rt <- which(file_names[] == input$spectrum_list_stocsy_rt)
 
-    ysup_stocsy_rt <- max (NMRData[freshnum_stocsy_rt,])
+    ysup_stocsy_rt <- max (NMRData_plot[freshnum_stocsy_rt,])
 
     yinf_stocsy_rt <- ysup_stocsy_rt*-0.03
 
@@ -297,11 +297,11 @@
 
     freshnum_stocsy_rt <- which(file_names[] == input$spectrum_list_stocsy_rt)
 
-    spectrums_stocsy_rt$dat <- data.frame(Chemical_Shift=CS_values_real[1,],Spectrum=NMRData[freshnum_stocsy_rt,])
+    spectrums_stocsy_rt$dat <- data.frame(Chemical_Shift=CS_values_real[1,],Spectrum=NMRData_plot[freshnum_stocsy_rt,])
 
     if (!idb_stocsy_rt && chkzoom_stocsy_rt == 1) {
 
-      ysup_stocsy_rt <- max (NMRData[freshnum_stocsy_rt,])
+      ysup_stocsy_rt <- max (NMRData_plot[freshnum_stocsy_rt,])
 
       yinf_stocsy_rt <- ysup_stocsy_rt*-0.03
 
