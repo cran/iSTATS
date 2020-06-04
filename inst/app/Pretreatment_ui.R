@@ -47,7 +47,7 @@ fluidPage(theme = 'zoo.css',
                    column(9, align="center",
 
                           fluidRow(
-                            fluidRow(p(strong("Non-normal regions will be in red."))),
+                            fluidRow(p(strong("Non-normal regions will be in red and normal regions in green."))),
                             plotOutput("plot_norm", height = "450px",click = "sel_click", dblclick = "plot_dblclick",
                                        brush = brushOpts(id = "plot_brush_norm",delay = 5000, fill = "#ccc", direction = "xy", resetOnNew = TRUE)
                             )

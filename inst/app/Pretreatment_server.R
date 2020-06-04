@@ -39,7 +39,8 @@ output$plot_norm <- renderPlot({
                     axis.title = ggplot2::element_text(face = "bold", color = "#000000", size = 15)
     ) +
     ggplot2::labs(x = "Chemical Shift", y = "Intensity") +
-    ggplot2::geom_vline(xintercept=rr_n$csranges, color = "red", size = 0.1, alpha=1)
+    ggplot2::geom_vline(xintercept=rr_nn$csranges, color = "green", size = 0.1, alpha=0.3) +
+    ggplot2::geom_vline(xintercept=rr_n$csranges, color = "red", size = 0.1, alpha=0.3)
 })
 
 

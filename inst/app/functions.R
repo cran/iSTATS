@@ -32,7 +32,27 @@ norm_test <- function(p_value,m) {
     }
   }
 
+
   dif <<- round((count_norm_y/length(norm_var))*100,2)
+
+  f <- 0
+  g <- 0
+  col_sel_norm <<- c()
+  col_sel_norm2 <<- c()
+
+  for (j in 1:length(norm_var)) {
+
+    if (norm_var[j] == "NO") {
+      f <- f + 1
+      col_sel_norm[f] <<- col_select[j]
+    }
+    else{
+      g <- g + 1
+      col_sel_norm2[g] <<- col_select[j]
+    }
+  }
+  rr_n$csranges <- CS_values_real[1,col_sel_norm]
+  rr_nn$csranges <- CS_values_real[1,col_sel_norm2]
 
     if (dif <= 70) {
       showModal(modalDialog(
@@ -41,7 +61,7 @@ norm_test <- function(p_value,m) {
       functions and do a pre-treatment before starting the STOCSY analysis or do not trust R critical "),
         easyClose = FALSE,
         # footer = modalButton("Close"),
-        footer = tagList(actionButton("pretreatment", "Normalize Seletion"),
+        footer = tagList(actionButton("pretreatment", "Normalize Selection"),
                          modalButton("Close")),
         size = "l"
       ))
@@ -50,7 +70,7 @@ norm_test <- function(p_value,m) {
     else{
       showModal(modalDialog(
         title = "Warning!!!",
-        paste("Your data is ", dif,"% normalized, your R critical is trustworthy"),
+        paste("Your data is ", dif,"% normalized."),
         easyClose = FALSE,
         footer = modalButton("Close"),
         size = "l"
@@ -149,6 +169,7 @@ refreshval <- function() {
 
   ###################### Pretreatment_server ###################
   rr_n <<- reactiveValues(csranges = c(-13131313,-131313))
+  rr_nn <<- reactiveValues(csranges = c(-13131313,-131313))
 
   ############################################################
 
@@ -164,8 +185,9 @@ refreshval <- function() {
 
   if (!(sel_ind == 0)) {
 
-  rr_n$csranges <<- c()
-  col_sel_norm <<- c()
+  # rr_n$csranges <<- c()
+  # rr_nn$csranges <- c()
+
 
   CS_sel_real <<- CS_selection$vranges[order(CS_selection$vranges,decreasing = TRUE)]
   matr_cor <<- matrix(data = NMRData[,col_select],dim(NMRData)[1], length(CS_sel_real))
@@ -183,19 +205,22 @@ refreshval <- function() {
   norm_test(p_value,m=NMR_MC)
   output$norm_cond <- renderText(paste("Affter normalize: ", dif,"%"))
 
-  f <- 0
-
-  for (j in 1:length(norm_var)) {
-
-    if (norm_var[j] == "NO") {
-      f <- f + 1
-      col_sel_norm[f] <<- col_select[j]
-    }
-    else{
-
-    }
-  }
-  rr_n$csranges <- CS_values_real[1,col_sel_norm]
+  # f <- 0
+  # g <- 0
+  #
+  # for (j in 1:length(norm_var)) {
+  #
+  #   if (norm_var[j] == "NO") {
+  #     f <- f + 1
+  #     col_sel_norm[f] <<- col_select[j]
+  #   }
+  #   else{
+  #     g <- g + 1
+  #     col_sel_norm2[g] <<- col_select[j]
+  #   }
+  # }
+  # rr_n$csranges <- CS_values_real[1,col_sel_norm]
+  # rr_nn$csranges <- CS_values_real[1,col_sel_norm2]
   }
   else{
     showModal(modalDialog(
