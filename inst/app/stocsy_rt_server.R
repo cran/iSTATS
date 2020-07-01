@@ -417,6 +417,11 @@
 
        })
 
+    # Plot_PDF I-STOCSY
+    observeEvent(input$stocsy_rt_print_PDF, {
+      ggplot2::ggsave("stocsy-rt.pdf",path = choose.dir(),width=195, height=105, units="mm", dpi = 300)
+    })
+
 
   observeEvent(input$hover_stocsy_rt, {
 

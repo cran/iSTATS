@@ -21,9 +21,7 @@
 
       ggplot2::ggplot(spectrums_multi$dat,ggplot2::aes(Chemical_Shift,Spectrum)) + ggplot2::geom_line(color='blue') + ggplot2::scale_x_reverse() +
 
-        # ggplot2::coord_cartesian(xlim = ranges_multi$x, ylim = ranges_multi$y, expand = FALSE) +  ## COMANDO ANTIGO QUE ESTÁ OK PARA GGPLOT2 3.2.1
-
-        ggplot2::coord_cartesian(xlim = c(ranges_multi$x[2],ranges_multi$x[1]), ylim = ranges_multi$y, expand = FALSE) + ## COMANDO QUE ESTÁ OK PARA GGPLOT2 3.3
+        ggplot2::coord_cartesian(xlim = c(ranges_multi$x[2],ranges_multi$x[1]), ylim = ranges_multi$y, expand = FALSE) +
 
         ggplot2::theme(axis.text.x = ggplot2::element_text(size = 12, color = "#000000"),
                        axis.text.y = ggplot2::element_text(size = 12, color = "#000000"),

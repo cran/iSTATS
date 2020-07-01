@@ -54,6 +54,8 @@ norm_test <- function(p_value,m) {
   rr_n$csranges <- CS_values_real[1,col_sel_norm]
   rr_nn$csranges <- CS_values_real[1,col_sel_norm2]
 
+  if (stop_menssager != 1) {
+
     if (dif <= 70) {
       showModal(modalDialog(
         title = "Warning!!!",
@@ -76,6 +78,8 @@ norm_test <- function(p_value,m) {
         size = "l"
       ))
     }
+
+  }
   # return(dif)
   }
 
@@ -380,7 +384,7 @@ refreshval <- function() {
     facts$fac_stocsy_i <<- rr[]
     facts_is$fac_stocsy_is <<- rr[]
     facts_rt$fac_stocsy_rt <<- rr[]
-    updateTabsetPanel(session, "main_bar", "STOCSY-i")
+    updateTabsetPanel(session, "main_bar", "STOCSY-I")
   }
 
   else {

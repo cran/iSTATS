@@ -25,6 +25,7 @@
      fluidRow(
 
        column(6,
+          sidebarPanel(width = 12,
 
           fluidRow(align = "center",
 
@@ -115,9 +116,11 @@
                                     height = "35px", width = "40px")
                             )
 
-                   )),
+                   ))),
 
        column(1,align = "left",
+
+
 
               radioButtons("radio_s", label = h5("Spectrum Type"), selected = 1,
                            choices = list("Average" = 1, "Overlap" = 2))),
@@ -128,6 +131,7 @@
 
 
     column(5,align = "center",div(style="line-height: 100px; vertical-align: center",
+       sidebarPanel(width = 12,
 
 
        tags$button(id = "sel_cor",
@@ -162,7 +166,7 @@
 
         )
 
-              )),
+              ))),
 
     fluidRow(div(style="height:15px")),
 
@@ -170,6 +174,7 @@
       fluidRow(
 
         column(6, align="center",
+          sidebarPanel(width = 12,
 
           fluidRow(p(strong("Select a region to be expanded at the right plot."))),
 
@@ -177,9 +182,10 @@
 
           plotOutput("plot1", height = "450px",click = "sel_click", dblclick = "plot_dblclick",
                      brush = brushOpts(id = "plot_brush",delay = 5000, fill = "#ccc", direction = "xy", resetOnNew = TRUE))
-        ),
+        )),
 
         column(6, align="center",
+          sidebarPanel(width = 12,
 
            fluidRow(p(strong("Select each region of interest and click on top left button to save it, then click on START."))),
 
@@ -189,7 +195,7 @@
 
 
         )
-      )
+      ))
 
 )
 

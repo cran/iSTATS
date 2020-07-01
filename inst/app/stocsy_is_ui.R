@@ -2,32 +2,30 @@
 
     fluidRow(
 
-      column(12, align="center",
-
-        column(3,align = "left",
+        column(3,align = "center",
+               sidebarPanel(width = 12,
 
            radioButtons("radio_is", label = h5("Correlation Type"),selected = 1,
-                                       choices = list("Pearson" = 1, "Spearman" = 2)
-                          )
-          ),
+                                       choices = list("Pearson" = 1, "Spearman" = 2))
+          )),
 
         column(9,align = "center",
+               sidebarPanel(width = 12,
 
          selectInput("spectrum_list_stocsy_is","Which spectrum do you want to see?",file_names[], selectize = FALSE),
 
-         p(strong("To perform STOCSY scaling, double click on the desired driver peak and then click on the button",em("START STOCSY-is"),"at the left menu."))
+         p(strong("To perform STOCSY scaling, double click on the desired driver peak and then click on the button",em("START STOCSY-is"),"at the left menu.")))
 
-        )
-
-        ),
+        )),
 
       fluidRow(align = "center",
 
-         column(2, align="center",
+         column(3, align="center",
+          sidebarPanel(width = 12,
 
            fluidRow(
 
-             sliderInput("cutoff_stocsy_is", label = h5("Correlation Cutoff"), min = 0,
+             sliderInput("cutoff_stocsy_is", label = h5("Correlation Cutoff"), min = 0,width = '250px',
                          max = 1, value = 0.9 , step= 0.01)
             ),
 
@@ -125,12 +123,38 @@
 
              br()
 
-             )
-           ),
+             ),
+           br(),
+
+           fluidRow(
+
+             selectInput("data_input_is",label="File extension", width = '100px',
+                         choices=c("png","tiff","jpeg","pdf")),
+             bsTooltip("data_input_is", "Select type file to download plot",
+                       "right", options = list(container = "body")),
+             # ),
+
+             # column(4, align="center",
+             #        fluidRow(div(style="height:5px")),
+
+             sliderInput("slide_dpi_is", label= 'DPI' ,min = 100, width = '250px',
+                         max = 1000, value = 200 , step= 10),
+             bsTooltip("slide_dpi", "Select dpi to download plot",
+                       "right", options = list(container = "body")),
+             # ),
+
+             # column(4, align="center",
+
+             downloadButton("plot_download_is","Download Plot", width = '100px',
+                            class = "btn shiny-download-link")
+           )
+           )),
 
 
 
-         column(10, align="center",
+         column(9, align="center",
+
+                sidebarPanel(width = 12,
 
 
            plotOutput("plot_stocsy_is", width = "100%", height = "500px", click = "click_stocsy_is", dblclick = "dblclick_stocsy_is",
@@ -140,6 +164,6 @@
 
 
            )
-         )
-      )
-    )
+      ))
+  )
+

@@ -40,15 +40,15 @@ fluidPage(title="iSTATS",
 
                       navbarMenu("STOCSY",
 
-                                 tabPanel("STOCSY-i",
+                                 tabPanel("STOCSY-I",
                                           source('stocsy_i_ui.R', local = T)[1]
                                  ),
 
-                                 tabPanel("STOCSY-is",
+                                 tabPanel("STOCSY-IS",
                                           source('stocsy_is_ui.R', local = T)[1]
                                  ),
 
-                                 tabPanel("STOCSY-rt",
+                                 tabPanel("STOCSY-RT",
                                           source('stocsy_rt_ui.R', local = T)[1]
 
                                  )

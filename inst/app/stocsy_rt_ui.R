@@ -26,7 +26,8 @@
 
       fluidRow(align = "center",
 
-         column(2, align="center",
+         column(3, align="center",
+                sidebarPanel(width =12,
 
            fluidRow(
 
@@ -114,12 +115,23 @@
 
       ),
 
-      br()
+     br(),
+     fluidRow(
 
-      ),
+       tags$button(id = "stocsy_rt_print_PDF",
+                   class = "btn action-button",
+                   tags$img(src = "exp_stocsy.png",
+                            height = "35px", width = "40px")),
+       bsTooltip("stocsy_rt_print_PDF", "Download PDF",
+                 "right", options = list(container = "body")),
+     )
+
+      )),
 
 
-      column(10, align="center",
+      column(9, align="center",
+
+             sidebarPanel(width =12,
 
          plotOutput("plot_stocsy_rt", width = "100%", height = "500px", click = "click_stocsy_rt", dblclick = "dblclick_stocsy_rt",
                     brush = brushOpts(id = "plot_brush_stocsy_rt",delay = 5000,
@@ -127,7 +139,7 @@
           )
 
 
-      )
+      ))
     )
   )
 

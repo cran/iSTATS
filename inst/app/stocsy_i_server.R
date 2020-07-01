@@ -130,10 +130,26 @@
   })
 
 
-  # Plot_PDF I-STOCSY
-  observeEvent(input$stocsy_i_print_PDF, {
-    ggsave("stocsy-i[1].pdf",width=195, height=105, units="mm", dpi = 1200)
+  ## Download plot
+
+
+  # DPI
+  observeEvent(input$slide_dpi, {
+
+    n_dpi <<- input$slide_dpi
+
   })
+
+  # Botton download plot
+  output$plot_download <- downloadHandler(
+    filename = function() {
+      paste0('stocsy-i.',input$data_input)
+    },
+    content = function(file1) {
+      ggplot2::ggsave(file1,width=295, device = input$data_input,height=205, units="mm", dpi = n_dpi)
+
+    }
+  )
 
 
   # List of samples for plot
@@ -304,7 +320,6 @@
     p_value_n <- as.numeric(input$pv)
     r_critical(p_value_n)
     output$r_critical <- renderText(paste("R critical = +/-",abs(R_CRITICAL[1])))
-    # updateSliderInput(session, "cutoff_stocsy_i", value = R_CRITICAL)
   })
 
 

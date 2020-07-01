@@ -65,8 +65,8 @@
 
       # Plot left
       output$plot1 <- renderPlot({
-        p <- ggplot2::ggplot() +
-          ggplot2::coord_cartesian(xlim = ranges$x, ylim = ranges$y, expand = FALSE) + ggplot2::scale_x_reverse() +
+        p <- ggplot2::ggplot() + ggplot2::scale_x_reverse() +
+          ggplot2::coord_cartesian(xlim =  c(ranges$x[2],ranges$x[1]), ylim = ranges$y, expand = FALSE) +
           ggplot2::theme(axis.text.x = ggplot2::element_text(size = 12, color = "#000000"),
                         axis.text.y = ggplot2::element_text(size = 12, color = "#000000"),
                         title = ggplot2::element_text(face = "bold", color = "#000000", size = 17),
@@ -84,8 +84,8 @@
 
   # Plot right
       output$plot2 <- renderPlot({
-        k <- ggplot2::ggplot() +
-          ggplot2::coord_cartesian(xlim = ranges_sel$x, ylim = ranges_sel$y, expand = FALSE) + ggplot2::scale_x_reverse() +
+        k <- ggplot2::ggplot()  + ggplot2::scale_x_reverse() +
+          ggplot2::coord_cartesian(xlim =  c(ranges_sel$x[2],ranges_sel$x[1]), ylim = ranges_sel$y, expand = FALSE) +
           ggplot2::theme(axis.text.x = ggplot2::element_text(size = 12, color = "#000000"),
                         axis.text.y = ggplot2::element_text(size = 12, color = "#000000"),
                         title = ggplot2::element_text(face = "bold", color = "#000000", size = 17),
@@ -162,7 +162,8 @@
         write.table(matr_cor, file,sep = ",",col.names = TRUE,row.names = FALSE)
       }
   )
-# })
+
+
   # Download bucket selected
   output$downloadareas <- downloadHandler(
     filename = function() {
@@ -295,6 +296,7 @@
         cor_pearson <<- cor(matr_cor[,])
         drv_pk <<- which.max(matr_cor[1,])
         rr <<- vector(mode="character")
+
         norm_test(p_value,matr_cor)
         r_critical(p_value)
 
@@ -327,7 +329,7 @@
         facts$fac_stocsy_i <<- rr[]
         facts_is$fac_stocsy_is <<- rr[]
         facts_rt$fac_stocsy_rt <<- rr[]
-        updateTabsetPanel(session, "main_bar", "STOCSY-i")
+        updateTabsetPanel(session, "main_bar", "STOCSY-I")
       }
 
       else {
@@ -339,6 +341,8 @@
           size = "l"
         ))
       }
+
+    stop_menssager <- 1
   })
 
   # Select regions

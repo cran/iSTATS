@@ -84,7 +84,7 @@ observeEvent(input$scaling_norm,{
   .autoscaling()
 
   f <- 0
-  output$norm_cond <- renderText(paste("Affter normalize: ", dif,"%"))
+  output$norm_cond <- renderText(paste("After normalize: ", dif,"%"))
 
   for (j in 1:length(norm_var)) {
 
@@ -515,7 +515,9 @@ output$downloadareas2 <- downloadHandler(
       }
     }
   }
-
-
 )
 
+# Plot_PDF I-STOCSY
+observeEvent(input$norm_print_PDF, {
+  ggplot2::ggsave("normal_regions.pdf",path = choose.dir(),width=195, height=105, units="mm", dpi = 300)
+})

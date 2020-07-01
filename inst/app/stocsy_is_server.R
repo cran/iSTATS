@@ -407,6 +407,30 @@
 
   })
 
+
+
+  ## Download plot
+
+
+  # DPI
+  observeEvent(input$slide_dpi_is, {
+
+    n_dpi <<- input$slide_dpi_is
+
+  })
+
+  # Botton download plot
+  output$plot_download_is <- downloadHandler(
+    filename = function() {
+      paste0('stocsy-i.',input$data_input_is)
+    },
+    content = function(file1) {
+      ggplot2::ggsave(file1,width=295, device = input$data_input,height=205, units="mm", dpi = n_dpi)
+
+    }
+  )
+
+
   observeEvent(input$cutoff_stocsy_is, {
 
     cor_cutoff <<- input$cutoff_stocsy_is

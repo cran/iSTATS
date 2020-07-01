@@ -2,6 +2,8 @@ fluidPage(theme = 'zoo.css',
           fluidRow(align = "center",
                    column(2, align="center",
 
+                          sidebarPanel(width = 12,
+
                           fluidRow(
                             actionButton("mean_norm", "Mean-Centering"),
                             fluidRow(div(style="height:5px")),
@@ -15,36 +17,64 @@ fluidPage(theme = 'zoo.css',
                             fluidRow(div(style="height:5px")),
                             actionButton("log_norm", "Log"),
                             fluidRow(div(style="height:5px")),
-                            actionButton("s_stocsy_i_norm", "Start STOCSY-I"),
-                                        bsTooltip("s_stocsy_i_norm", "Start STOCSY-I from normalized data",
-                                                  "right", options = list(container = "body")),
                             fluidRow(div(style="height:5px"))
                           ),
 
+
+
+
                         fluidRow(
 
-                          fluidRow( textInput("pv_n", "p-value", "0.05")),
-                          fluidRow(verbatimTextOutput("norm_cond")),
+                          fluidRow(div(style="width:150px;",textInput("pv_n", "p-value", "0.05"))),
+                          fluidRow(div(style="width:150px;",verbatimTextOutput("norm_cond"))),
+                          fluidRow(
+                            tags$button(id = "s_stocsy_i_norm",
+                                        class = "btn action-button btn_t",
+                                        tags$img(src = "s_stocsy_.png",
+                                                 height = "35px", width = "40px")),
+                            bsTooltip("s_stocsy_i_norm", "Start STOCSY-I on normalize data",
+                                      "right", options = list(container = "body")),
+
+
+                          ))),
+
+                          sidebarPanel(width = 12,
+
+                          fluidRow(
+
                           downloadButton("downloadareas2",icon("sakod"),
                                          class = "btn btn-default shiny-download-link",
                                          tags$img(src = "download_buckets.png",
                                                   height = "35px", width = "40px")),
                                           bsTooltip("downloadareas2", "Download selected areas normalized",
-                                                    "right", options = list(container = "body")),
-
+                                                    "right", options = list(container = "body"))),
+                          fluidRow(div(style="height:5px")),
+                          fluidRow(
 
                           downloadButton("downloadpoints2", icon("sakod"),
                                          class = "btn btn-default shiny-download-link",
                                          tags$img(src = "download_points.png",
                                                   height = "35px", width = "40px")),
                                          bsTooltip("downloadpoints2", "Download selected points normalized",
-                                                   "right", options = list(container = "body"))
+                                                   "right", options = list(container = "body"))),
+                          fluidRow(div(style="height:5px")),
+                          fluidRow(
 
-                   )),
+                            tags$button(id = "norm_print_PDF",
+                                        class = "btn action-button",
+                                        tags$img(src = "exp_stocsy.png",
+                                                 height = "35px", width = "40px")),
+                            bsTooltip("norm_print_PDF", "Download PDF",
+                                      "right", options = list(container = "body")),
+                          ))
 
-                   column(1,align="center"),
 
-                   column(9, align="center",
+                   ),
+
+
+                   column(10, align="center",
+
+                          sidebarPanel(width = 12,
 
                           fluidRow(
                             fluidRow(p(strong("Non-normal regions will be in red and normal regions in green."))),
@@ -52,5 +82,5 @@ fluidPage(theme = 'zoo.css',
                                        brush = brushOpts(id = "plot_brush_norm",delay = 5000, fill = "#ccc", direction = "xy", resetOnNew = TRUE)
                             )
                           )
-                   )
+                   ))
 ))

@@ -1,14 +1,13 @@
   fluidPage(theme = 'zoo.css',
 
-    fluidRow(column(12, align="center",
+     sidebarPanel(width = 12,
 
-      selectInput("spectrum_list_multi","Which spectrum do you want to see?", file_names[], selectize = FALSE))
+      fluidRow(div(style="width:300px;",align="center",
+      selectInput("spectrum_list_multi","Which spectrum do you want to see?", file_names[], selectize = FALSE)
 
-    ),
+    )),
 
-    fluidRow(align = "center",
-
-      column(12,
+      fluidRow(
 
         tags$button(id = "x2_multi",
                     class = "btn action-button",
@@ -65,26 +64,16 @@
         )
 
       )
-    )
-                  ,
+    ),
 
-
+    sidebarPanel(width = 12,
 
     fluidRow(align = "center",
 
-      br(),
-
       plotly::plotlyOutput("plot_multi")
 
-      # plotOutput("plot_multi", width = "90%", height = "500px",
-      #            click = "plot_click_multi", dblclick = "plot_dblclick_multi",
-      #            brush = brushOpts(id = "plot_brush_multi",delay = 5000,
-      #                              fill = "#ccc", direction = "xy", resetOnNew = TRUE)
-      #
-      #
-      # )
 
-    )
+    ))
 
 
 
