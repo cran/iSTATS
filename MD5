@@ -1,10 +1,10 @@
-d1d0dbd443b97121b408bbfd00a05ff3 *DESCRIPTION
+b318dcdb77672843e745c10f172f7f7b *DESCRIPTION
 db533d062a779ab1c2d2fe319f3e3e82 *NAMESPACE
 aa386858458306823e8c413a29f104e3 *R/data.R
 1b6573f71524417ae49f6f2d01e66994 *R/main.R
-03cbf05ca4a6f6a21e271177ac81370a *data/CS_values_real.RData
-ac7dfd8027571a68f56d49af3cd25abb *data/NMRData.RData
-364d0909296b1ed669e3d243c4a321b7 *data/file_names.RData
+c201f4754c885dfa8d76ccca69a65598 *data/CS_values_real.rda
+f2d1f7abe794c90f843f7425f2129415 *data/NMRData.rda
+a310742a399bb8726b610db26c357500 *data/file_names.rda
 8aeb7cfc8218315e19c82a65e5df98e7 *inst/app/Pretreatment_server.R
 c916dc633249db9a43012cb72745ee31 *inst/app/Pretreatment_ui.R
 884e45973469845d8709b6182ea12f31 *inst/app/about_ui.R
@@ -16,9 +16,9 @@ fd8d583ffacf6a491f5db8d33cf5d5fb *inst/app/global.R
 00a8c72cdab5169ca3fb329a1e4a6580 *inst/app/home_ui.R
 6497b99b6aaf96d49bd4a73ead3c977a *inst/app/plot_interativo_server.R
 57d9c469bf8b60d0d8e6beb542066519 *inst/app/plot_interativo_ui.R
-3187d281492b85b8185b85358a183e21 *inst/app/select_signals_server.R
-5309c0e903e88ea0f1512ddf08cdcd86 *inst/app/select_signals_ui.R
-c1920a178f2c45d86b281242281d75fb *inst/app/server.R
+5958cb7d3302473517bf93358fb2b742 *inst/app/select_signals_server.R
+473a4d57919ba0e5af85b4275b5ca01b *inst/app/select_signals_ui.R
+f06c8b2daafb0361ca1ee9cb91be3607 *inst/app/server.R
 530e91755bd17e22d621ae336d90934a *inst/app/stocsy_i_server.R
 bc74d08e5dc6bdabd62f9c6d7b4d4119 *inst/app/stocsy_i_ui.R
 de9fe7e833deb2c3e5140209406b79fc *inst/app/stocsy_is_server.R
@@ -27,7 +27,7 @@ affb821dee2418d619c1db1a2f7df472 *inst/app/stocsy_is_ui.R
 a00707bef5f242c71d6e5b1149beae8c *inst/app/stocsy_rt_ui.R
 18ce9a9cdd2d2883ad80e69a9e66e8f7 *inst/app/ui.R
 9bb5662f60befd9d6df5aa7830703942 *inst/app/uploader_server.R
-4ef25b3129b34595a9fffffacc40ad08 *inst/app/uploader_server_CSV.R
+1649dee5235828a1cde32a16e85173bd *inst/app/uploader_server_CSV.R
 dc00bfcd9942957c4eab3f49eab4e66e *inst/app/uploader_server_Rdata.R
 d4724fc84d5f650e510c9fd3e55a2ff4 *inst/app/www/Plot_Save.png
 f7501b927d60e409a06839b5022e2097 *inst/app/www/all.png
@@ -47,7 +47,7 @@ acfe49d6c2f6f4cecfae4d3f2af30d4c *inst/app/www/download_points.png
 f4e54df937921b85fc0e813ffda900a7 *inst/app/www/exp.png
 d4724fc84d5f650e510c9fd3e55a2ff4 *inst/app/www/exp_stocsy.png
 b42f18e9a9fcfaed27e7187d0bf0d9be *inst/app/www/iSTATS_logo.png
-7b6431c76727e997334966455566b962 *inst/app/www/istats1.gif
+07b1ea5a97271f4caf17e9df894821f7 *inst/app/www/istats1.gif
 21dfcd2184d8c47608c9e4451ff2b9c8 *inst/app/www/logo_ISTATS.png
 cdd4a41f85409d71ab26d3575b1304ab *inst/app/www/logo_stocsy.gif
 7a40fb656d19c9189121d53640be1fc2 *inst/app/www/r.data_i.png
@@ -59,6 +59,7 @@ ded9d58925ae90bb96fcfb020bd0c32f *inst/app/www/s_left.png
 530a9dcfc85c33a2627f8f071c373751 *inst/app/www/s_right_f.png
 a889c3d2c448a00e4d4b1a88033157a8 *inst/app/www/s_stocsy_.png
 f6ab532a2270c777480b8f649fdb5625 *inst/app/www/s_stocsy_is.png
+780cf5c162794b1a245008daf7ea912b *inst/app/www/save_selected.png
 17666d67a526d0a8856700b13eee66d3 *inst/app/www/sel_cor.png
 7b38e076c2cf39475d65f733e6717ec5 *inst/app/www/tiffspec.png
 3687f6e9e6099593f62be62917afea1f *inst/app/www/zoo.css

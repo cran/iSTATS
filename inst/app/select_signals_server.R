@@ -1,4 +1,6 @@
-  # Variables
+# PAREI NA PARTE DE COLOCAR NOVAS SELECÕES ONDE JA TEM AS SELECIONADAS
+
+ # Variables
   NMRData_Mean <- colMeans(NMRData_plot[,])
   col_select <<- c()
   alr_click <<- 0
@@ -6,6 +8,7 @@
   exran <<- c()
   exp_click <<- 0
   ysup <- max(NMRData_plot[,])
+  col_select_old <- c()
 
 
   ############# olhar yinf ###################################
@@ -146,10 +149,20 @@
     chkzoom <<- chkzoom/8
     spectrums$dat$Spectrum <- spectrums$dat$Spectrum/8
   })
+  
+  # Download point selected to save coluns select
+  output$downloadpoints_save <- downloadHandler(
+    filename = function() {
+      paste("Selected_Regions_saved", ".csv", sep = "")
+    },
+    content = function(file) {
+      write.table(reg_selec,file, sep = ",",col.names = FALSE,row.names = FALSE)
+    }
+  )
+  
+  
 
   # Download point selected
-  # observeEvent(input$downloadpoints1, {
-
   output$downloadpoints <- downloadHandler(
     filename = function() {
         paste("Selected_Regions", ".csv", sep = "")
@@ -160,6 +173,7 @@
         matr_cor <<- matrix(data = NMRData[,col_select],dim(NMRData)[1], length(CS_sel_real))
         colnames(matr_cor) <<- CS_sel_real
         write.table(matr_cor, file,sep = ",",col.names = TRUE,row.names = FALSE)
+        write.table(col_select,file, sep = ",",col.names = FALSE,row.names = FALSE)
       }
   )
 
@@ -344,11 +358,17 @@
 
     stop_menssager <- 1
   })
+  
+  # plot regions selected
+  observeEvent(input$region_selected,{
+    
+    
+  })
+  
 
   # Select regions
   observeEvent(input$sel_cor, {
       brush <- input$sel_brush
-
       if (!is.null(brush)) {
 
         if (sel_ind == 0) {
@@ -356,17 +376,18 @@
           CS_selection$vranges <<- c()
           hlim <- which(abs(CS_values_real[1,]-brush$xmin)==min(abs(CS_values_real[1,]-brush$xmin)))
           llim <- which(abs(CS_values_real[1,]-brush$xmax)==min(abs(CS_values_real[1,]-brush$xmax)))
-          col_select <<- seq(llim, hlim, 1)
+          col_select <<- c(seq(llim, hlim, 1),col_select_old)
           CS_selection$vranges <<- CS_values_real[1,col_select]
-          matr_selec <<- rowSums(matrix(data = NMRData[,llim:hlim],dim(NMRData)[1], length(CS_selection$vranges)))
-          reg_selec <<- matrix (data = c(brush$xmin,brush$xmax), 1, 2)
+          matr_selec <<- rowSums(matrix(data = NMRData[,llim:hlim],dim(NMRData)[1], length(col_select)))
+          reg_selec <<- matrix(data = c(brush$xmin,brush$xmax), 1, 2)
           pos_map <<- matrix(c(1,length(col_select)), 1, 2)
+          
         }
 
         else {
           sel_ind <<- sel_ind + 1
           s_ind <<- 0
-
+          
           if (sel_ind == 2) {
 
             if (((brush$xmin >= reg_selec[1,1]) && (brush$xmin <= reg_selec[1,2])) || ((brush$xmax >= reg_selec[1,1]) && (brush$xmax <= reg_selec[1,2])) || ((reg_selec[1,1] >= brush$xmin) && (reg_selec[1,1] <= brush$xmax)) || ((reg_selec[1,2] >= brush$xmin) && (reg_selec[1,2] <= brush$xmax))  ) {
@@ -377,9 +398,8 @@
 
           else if (sel_ind > 2) {
             ind_gol <- 0
-
+            
             for (i in 1:dim(reg_selec)[1]) {
-
               if (((brush$xmin >= reg_selec[i,1]) && (brush$xmin <= reg_selec[i,2])) || ((brush$xmax >= reg_selec[i,1]) && (brush$xmax <= reg_selec[i,2])) || ((reg_selec[i,1] >= brush$xmin) && (reg_selec[i,1] <= brush$xmax)) || ((reg_selec[i,2] >= brush$xmin) && (reg_selec[i,2] <= brush$xmax))  ) {
                 ind_gol <- 1
               }
@@ -390,19 +410,19 @@
               sel_ind <<- sel_ind - 1
             }
           }
-
+          
           if (s_ind == 0) {
-          hlim <- which(abs(CS_values_real[1,]-brush$xmin)==min(abs(CS_values_real[1,]-brush$xmin)))
-          llim <- which(abs(CS_values_real[1,]-brush$xmax)==min(abs(CS_values_real[1,]-brush$xmax)))
-          col_select_2 <<- seq(llim, hlim, 1)
-          beg_ind <- pos_map[(sel_ind-1),2]
-          act_map <- c((beg_ind+1),(beg_ind+length(col_select_2)))
-          pos_map <<- rbind(pos_map,act_map)
-          CS_selection$vranges <<- c(CS_selection$vranges, CS_values_real[1,col_select_2])
-          dyn_brush <- c(brush$xmin,brush$xmax)
-          reg_selec <<- rbind(reg_selec, dyn_brush)
-          col_select <<- c(col_select, col_select_2)
-          matr_selec <<- cbind(matr_selec,rowSums(matrix(data = NMRData[,llim:hlim],dim(NMRData)[1], length(col_select_2))))
+            hlim <- which(abs(CS_values_real[1,]-brush$xmin)==min(abs(CS_values_real[1,]-brush$xmin)))
+            llim <- which(abs(CS_values_real[1,]-brush$xmax)==min(abs(CS_values_real[1,]-brush$xmax)))
+            col_select_2 <<- seq(llim, hlim, 1)
+            col_select <<- c(col_select, col_select_2)
+            reg_selec <<- rbind(reg_selec, c(brush$xmin,brush$xmax))
+            pos_low <- which(col_select==llim)
+            pos_high <- which(col_select==hlim)
+            pos_map <<- rbind(pos_map, matrix(c(pos_low,pos_high), 1, 2))
+            dyn_brush <- c(brush$xmin,brush$xmax)
+            CS_selection$vranges <<- c(CS_selection$vranges, CS_values_real[1,col_select])
+            matr_selec <<- cbind(matr_selec,rowSums(matrix(data = NMRData[,llim:hlim],dim(NMRData)[1], length(col_select_2))))
           }
 
           else {
@@ -427,20 +447,21 @@
           size = "l"
           ))
       }
-
+      
+      
+# click to delete regions selected
     observeEvent(input$sel_click, {
         if (alr_click == 1) {
          exc_val <- input$sel_click$x
 
          if (dim(reg_selec)[1] == 1) {
-
            if ((exc_val >= reg_selec[1,1]) && (exc_val <= reg_selec[1,2])) {
              reg_selec <<- matrix (0, 1, 2)
              col_select <<- c()
              CS_selection$vranges <<- c(-13131313,-131313)
              sel_ind <<- 0
            }
-         }
+        }
 
          if (dim(reg_selec)[1] > 1) {
            row_reg <<- 0
@@ -458,17 +479,16 @@
              e_point <- pos_map[row_reg,2]
              cut_all <- seq(b_point, e_point, 1)
 
-             if (sel_ind == 2) {
+            if (sel_ind == 2) {
                reg_selec <<- matrix(reg_selec[-row_reg,], 1, 2)
              }
 
              else {
              reg_selec <<- reg_selec[-row_reg,]
              }
-
+             
              col_select <<- col_select[-c(cut_all)]
-             CS_selection$vranges <<- CS_selection$vranges[-c(cut_all)]
-
+             CS_selection$vranges <<- CS_values_real[1,col_select]
              if (row_reg == 1) {
              pos_delta <<- as.integer(pos_map[1,2] - pos_map[1,1] + 1)
 
@@ -504,7 +524,7 @@
       }
     })
 
-    # Delect region
+    # Delete region
     observeEvent(input$exc_reg, {
         if (!(sel_ind == 0)) {
         alr_click <<- 1
