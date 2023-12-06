@@ -1,4 +1,4 @@
-b318dcdb77672843e745c10f172f7f7b *DESCRIPTION
+fe96892e045787746772999b0a3dccd4 *DESCRIPTION
 db533d062a779ab1c2d2fe319f3e3e82 *NAMESPACE
 aa386858458306823e8c413a29f104e3 *R/data.R
 1b6573f71524417ae49f6f2d01e66994 *R/main.R
@@ -12,11 +12,11 @@ c916dc633249db9a43012cb72745ee31 *inst/app/Pretreatment_ui.R
 62b7ea0f51c35a45b035cf8c01d9d6fb *inst/app/example_data_server.R
 a23fa797a15cb4f6424dc9ce545319aa *inst/app/example_data_ui.R
 5aa4ff76dec9712617db3708ee6462b3 *inst/app/functions.R
-fd8d583ffacf6a491f5db8d33cf5d5fb *inst/app/global.R
+7e836391e5d3c44e7f2e65c61fd57336 *inst/app/global.R
 00a8c72cdab5169ca3fb329a1e4a6580 *inst/app/home_ui.R
-6497b99b6aaf96d49bd4a73ead3c977a *inst/app/plot_interativo_server.R
+5d3e8ea058db1086eab4be39e6e5fb66 *inst/app/plot_interativo_server.R
 57d9c469bf8b60d0d8e6beb542066519 *inst/app/plot_interativo_ui.R
-5958cb7d3302473517bf93358fb2b742 *inst/app/select_signals_server.R
+3015aa0b7a7937828af56eb2feac509c *inst/app/select_signals_server.R
 473a4d57919ba0e5af85b4275b5ca01b *inst/app/select_signals_ui.R
 f06c8b2daafb0361ca1ee9cb91be3607 *inst/app/server.R
 530e91755bd17e22d621ae336d90934a *inst/app/stocsy_i_server.R
@@ -26,9 +26,9 @@ affb821dee2418d619c1db1a2f7df472 *inst/app/stocsy_is_ui.R
 6e6c4714cb65bb7252e39e2ba0be74e8 *inst/app/stocsy_rt_server.R
 a00707bef5f242c71d6e5b1149beae8c *inst/app/stocsy_rt_ui.R
 18ce9a9cdd2d2883ad80e69a9e66e8f7 *inst/app/ui.R
-9bb5662f60befd9d6df5aa7830703942 *inst/app/uploader_server.R
-1649dee5235828a1cde32a16e85173bd *inst/app/uploader_server_CSV.R
-dc00bfcd9942957c4eab3f49eab4e66e *inst/app/uploader_server_Rdata.R
+c24f754cc6faaa575ed8791b517492ee *inst/app/uploader_server.R
+0a912be14a7a70da20b260ca1359b209 *inst/app/uploader_server_CSV.R
+64392df992d3545721de9a07227a76a8 *inst/app/uploader_server_Rdata.R
 d4724fc84d5f650e510c9fd3e55a2ff4 *inst/app/www/Plot_Save.png
 f7501b927d60e409a06839b5022e2097 *inst/app/www/all.png
 fed705e4294f1ed87bc4e7ab1739ad5a *inst/app/www/all_w.png

@@ -1,10 +1,10 @@
 # Import and build matrix
 observeEvent(input$file1, {
   buma <<- 0
-
+  
   if(is.null(input$file1))  return(NULL)
   up <<-input$file1
-
+  
   if (length(up$name) < 2) {
     showModal(modalDialog(
       title = "Warning!!!",
@@ -15,15 +15,15 @@ observeEvent(input$file1, {
     ))
     buma <<- 1
   }
-
+  
   else {
     upfile <<-list()
-
+    
     for(l in 1:length(up$name)) {
       upfile[[l]] <<- data.table::fread(up$datapath[l],
-                            header = FALSE, sep = ",",data.table=FALSE)
+                                        header = FALSE, sep = ",",data.table=FALSE)
     }
-
+    
     lslim = as.numeric(input$ls_lims)
     hslim = as.numeric(input$hs_lims)
     file_names_full <<- up$name
@@ -33,7 +33,7 @@ observeEvent(input$file1, {
     upfile <<- lapply(upfile, function(k) if(anyNA(k)) k[-1,c(4,2)] else k[,c(4,2)])
     list_len <- length(upfile)
     CS_values <<- unlist((upfile[[1]][1]),use.names = FALSE, recursive = FALSE)
-    NMRData_temp <<- t(lapply(upfile, function(k) k[,2]))
+    NMRData_temp <<- t(lapply(upfile, function(k) as.numeric(k[,2])))
     hspoint <- which(abs(CS_values-lslim)==min(abs(CS_values-lslim)))[1]
     lspoint <- which(abs(CS_values-hslim)==min(abs(CS_values-hslim)))[1]
     npf = hspoint - lspoint
@@ -46,7 +46,7 @@ observeEvent(input$file1, {
     CS_values_real <<- rbind(CS_values,CS_values)
     NMRData_plot <<- NMRData
     NMRData <<- NMRData + abs(min(NMRData))
-
+    
     refreshval()
     updateSelectInput(session, "spectrum_list_multi", choices = file_names[])
     updateSelectInput(session, "spectrum_list_stocsy_i", choices = file_names[])
@@ -76,7 +76,7 @@ output$imputa <- renderUI({
                                         textInput("ls_lims", "min","0.0",
                                                   width = "150px")
                                  ),
-
+                                 
                                  column(1, align="center",
                                         textInput("hs_lims", "max","10.0", width = "150px")
                                  ),
